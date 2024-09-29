@@ -3,269 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RKM - Ready to Ket Money</title>
+    <title>RKM</title> <!-- Title set to "RKM" -->
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 20px; 
-            background-color: #f4f4f4; 
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
         }
-        button { 
-            margin: 10px; 
-            padding: 10px 20px; 
-            font-size: 16px; 
-            background-color: #4CAF50; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            transition: background-color 0.3s; 
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        button:hover { 
-            background-color: #45a049; 
+        button:hover {
+            background-color: #0056b3;
         }
-        #earnings { 
-            font-size: 20px; 
-            margin-bottom: 20px; 
-            color: #333; 
+        #earnings {
+            font-size: 20px;
+            margin-bottom: 20px;
         }
-        .logo { 
-            border-radius: 50%; 
-            width: 100px; 
-            height: 100px; 
-            object-fit: cover; 
-            margin-bottom: 20px; 
+        .logo {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
         }
-        .hidden { 
-            display: none; 
-        }
-        input { 
-            padding: 10px; 
-            margin: 10px; 
-            width: 80%; 
-            border-radius: 5px; 
-            border: 1px solid #ccc; 
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <img src="IMG-20240929-WA0000.jpg" alt="RKM Logo" class="logo" />
+    <img src="your-logo-url.png" alt="App Logo" class="logo" />
+    <h1>RKM</h1>
+    <p>Ready to Ket Money</p>
     <div id="earnings">Total Earnings: ₹<span id="totalEarnings">0</span></div>
-    <button onclick="loadPage('wallet')">Open Wallet</button>
-    <button onclick="loadPage('tasks')">Daily Tasks</button>
-    <button onclick="loadPage('videoTasks')">Watch Videos</button>
-    <button onclick="loadPage('luckyGifts')">Lucky Gifts</button>
-    <button onclick="loadPage('referrals')">Referral Friends</button>
+    <button onclick="openWallet()">Open Wallet</button>
+    <button onclick="openTasks()">Daily Tasks</button>
+    <button onclick="openVideoTasks()">Watch Videos</button>
+    <button onclick="openLuckyGifts()">Lucky Gifts</button>
+    <button onclick="openReferrals()">Referral Friends</button>
 
+    <!-- Wallet Section -->
     <div id="wallet" class="hidden">
         <h1>Wallet</h1>
         <p>Your Balance: ₹<span id="balance">0</span></p>
-        <button onclick="showEarnings()">Show Earnings</button>
-        <button onclick="openWithdrawal()">Withdraw</button>
+        <button onclick="loadUPI()">Withdraw via UPI</button>
+        <button onclick="loadBankTransfer()">Withdraw via Bank Transfer</button>
+        <button onclick="loadGooglePay()">Withdraw via Google Pay</button>
         <button onclick="goBack('main')">Back to Main Menu</button>
     </div>
 
+    <!-- Tasks Section -->
     <div id="tasks" class="hidden">
         <h1>Daily Tasks</h1>
-        <button onclick="completeTask(1)">Complete Task 1: Earn ₹2</button>
-        <button onclick="completeTask(2)">Complete Task 2: Earn ₹2</button>
-        <button onclick="completeTask(3)">Complete Task 3: Earn ₹2</button>
+        <button id="task1" onclick="completeTask(1)">Task 1</button>
+        <button id="task2" onclick="completeTask(2)">Task 2</button>
+        <button id="task3" onclick="completeTask(3)">Task 3</button>
         <button onclick="goBack('main')">Back to Main Menu</button>
     </div>
 
+    <!-- Video Tasks Section -->
     <div id="videoTasks" class="hidden">
         <h1>Video Tasks</h1>
-        <button onclick="watchVideo(1)">Watch Video 1: Earn ₹2</button>
-        <button onclick="watchVideo(2)">Watch Video 2: Earn ₹2</button>
-        <button onclick="watchVideo(3)">Watch Video 3: Earn ₹2</button>
+        <button id="video1" onclick="completeVideo(1)">Video 1</button>
+        <button id="video2" onclick="completeVideo(2)">Video 2</button>
+        <button id="video3" onclick="completeVideo(3)">Video 3</button>
         <button onclick="goBack('main')">Back to Main Menu</button>
     </div>
 
+    <!-- Lucky Gifts Section -->
     <div id="luckyGifts" class="hidden">
         <h1>Lucky Gifts</h1>
-        <button onclick="openGift(1)">Open Lucky Gift: 🎁</button>
+        <button id="gift1" onclick="openGift(1)">Gift 1</button>
         <button onclick="goBack('main')">Back to Main Menu</button>
     </div>
 
+    <!-- Referrals Section -->
     <div id="referrals" class="hidden">
         <h1>Referral Friends</h1>
-        <p>Share this referral link to invite friends: <a href="https://t.me/YourTelegramBot?start=referral_code">https://t.me/YourTelegramBot?start=referral_code</a></p>
         <p>You have referred <span id="referralCount">0</span> friends.</p>
         <button onclick="goBack('main')">Back to Main Menu</button>
-    </div>
-
-    <div id="withdrawal" class="hidden">
-        <h1>Withdrawal Options</h1>
-        <button onclick="openUPI()">Withdraw via UPI</button>
-        <button onclick="openBankTransfer()">Withdraw via Bank Transfer</button>
-        <button onclick="openGooglePay()">Withdraw via Google Pay</button>
-        <button onclick="goBack('wallet')">Back to Wallet</button>
-    </div>
-
-    <div id="upiForm" class="hidden">
-        <h1>UPI Withdrawal</h1>
-        <input type="text" id="upiId" placeholder="Enter your UPI ID" />
-        <button onclick="submitUPI()">Submit UPI</button>
-        <button onclick="goBack('withdrawal')">Back to Withdrawal Options</button>
-    </div>
-
-    <div id="bankForm" class="hidden">
-        <h1>Bank Transfer Withdrawal</h1>
-        <input type="text" id="bankName" placeholder="Enter Bank Name" />
-        <input type="text" id="ifscCode" placeholder="Enter IFSC Code" />
-        <input type="text" id="accountNumber" placeholder="Enter Account Number" />
-        <input type="text" id="accountHolderName" placeholder="Enter Your Name" />
-        <button onclick="submitBankTransfer()">Submit Bank Transfer</button>
-        <button onclick="goBack('withdrawal')">Back to Withdrawal Options</button>
-    </div>
-
-    <div id="googlePayForm" class="hidden">
-        <h1>Google Pay Withdrawal</h1>
-        <input type="text" id="googlePayNumber" placeholder="Enter Google Pay Number or Phone Number" />
-        <button onclick="submitGooglePay()">Submit Google Pay</button>
-        <button onclick="goBack('withdrawal')">Back to Withdrawal Options</button>
     </div>
 
     <script>
         let totalEarnings = 0;
         let balance = 0;
-        let referralCount = 0;
-
-        // Load saved data from localStorage
-        const savedDate = localStorage.getItem('lastCompletedDate');
-        const today = new Date().toLocaleDateString();
-
-        let tasksCompleted = JSON.parse(localStorage.getItem('tasksCompleted')) || { 1: false, 2: false, 3: false };
-        let videosWatched = JSON.parse(localStorage.getItem('videosWatched')) || { 1: false, 2: false, 3: false };
-        let giftsOpened = JSON.parse(localStorage.getItem('giftsOpened')) || { 1: false };
-
-        // Reset task status if it's a new day
-        if (savedDate !== today) {
-            tasksCompleted = { 1: false, 2: false, 3: false };
-            videosWatched = { 1: false, 2: false, 3: false };
-            giftsOpened = { 1: false };
-            localStorage.setItem('lastCompletedDate', today);
-        }
-
-        function loadPage(pageId) {
-            hideAll();
-            document.getElementById(pageId).classList.remove('hidden');
-        }
-
-        function hideAll() {
-            const sections = ['wallet', 'tasks', 'videoTasks', 'luckyGifts', 'referrals', 'withdrawal', 'upiForm', 'bankForm', 'googlePayForm'];
-            sections.forEach(section => {
-                document.getElementById(section).classList.add('hidden');
-            });
-        }
 
         function completeTask(taskId) {
-            if (tasksCompleted[taskId]) {
-                alert('Task ' + taskId + ' is already completed for today!');
-                return;
+            let taskUrl;
+            let taskButton;
+            if (taskId === 1) {
+                taskUrl = "https://readyketmoney.blogspot.com/2024/09/task2.html";
+                taskButton = document.getElementById("task1");
+                taskButton.innerText = "Task 1 Completed"; // Change button text after completion
+            } else if (taskId === 2) {
+                taskUrl = "https://readyketmoney.blogspot.com/2024/09/task3.html"; // Replace with your actual Task 2 URL
+                taskButton = document.getElementById("task2");
+                taskButton.innerText = "Task 2 Completed"; // Change button text after completion
+            } else if (taskId === 3) {
+                taskUrl = "https://readyketmoney.blogspot.com/2024/09/task4.html"; // Replace with your actual Task 3 URL
+                taskButton = document.getElementById("task3");
+                taskButton.innerText = "Task 3 Completed"; // Change button text after completion
             }
-            alert('You completed Task ' + taskId + ' and earned ₹2!');
+
+            // Open the task URL
+            window.open(taskUrl, "_blank");
+
+            // Redirect to Telegram Bot profile after task
+            window.location.href = "https://t.me/ReadytoKM_bot?profile";
+
+            // Increment earnings upon completing the task
             totalEarnings += 2;
             balance += 2;
             document.getElementById('totalEarnings').innerText = totalEarnings;
             document.getElementById('balance').innerText = balance;
-            tasksCompleted[taskId] = true; // Mark the task as completed
-            localStorage.setItem('tasksCompleted', JSON.stringify(tasksCompleted));
         }
 
-        function watchVideo(videoId) {
-            if (videosWatched[videoId]) {
-                alert('Video ' + videoId + ' is already watched for today!');
-                return;
-            }
+        function completeVideo(videoId) {
+            let videoButton = document.getElementById("video" + videoId);
+            videoButton.innerText = "Video " + videoId + " Watched"; // Change button text after completion
             alert('You watched Video ' + videoId + ' and earned ₹2!');
             totalEarnings += 2;
             balance += 2;
             document.getElementById('totalEarnings').innerText = totalEarnings;
             document.getElementById('balance').innerText = balance;
-            videosWatched[videoId] = true; // Mark the video as watched
-            localStorage.setItem('videosWatched', JSON.stringify(videosWatched));
         }
 
         function openGift(giftId) {
-            if (giftsOpened[giftId]) {
-                alert('You have already opened this Lucky Gift!');
-                return;
-            }
-            alert('You opened a Lucky Gift and earned ₹5!');
-            totalEarnings += 5;
-            balance += 5;
-            document.getElementById('totalEarnings').innerText = totalEarnings;
-            document.getElementById('balance').innerText = balance;
-            giftsOpened[giftId] = true; // Mark the gift as opened
-            localStorage.setItem('giftsOpened', JSON.stringify(giftsOpened));
+            alert('You opened Gift ' + giftId + '!');
         }
 
-        function showEarnings() {
-            alert('Total Earnings: ₹' + totalEarnings);
+        function openWallet() {
+            document.getElementById('wallet').classList.remove('hidden');
+            document.getElementById('tasks').classList.add('hidden');
+            document.getElementById('videoTasks').classList.add('hidden');
+            document.getElementById('luckyGifts').classList.add('hidden');
+            document.getElementById('referrals').classList.add('hidden');
         }
 
-        function openWithdrawal() {
-            document.getElementById('withdrawal').classList.remove('hidden');
-            hideAllExcept('withdrawal');
+        function openTasks() {
+            document.getElementById('tasks').classList.remove('hidden');
+            document.getElementById('wallet').classList.add('hidden');
+            document.getElementById('videoTasks').classList.add('hidden');
+            document.getElementById('luckyGifts').classList.add('hidden');
+            document.getElementById('referrals').classList.add('hidden');
         }
 
-        function openUPI() {
-            document.getElementById('upiForm').classList.remove('hidden');
-            hideAllExcept('upiForm');
+        function openVideoTasks() {
+            document.getElementById('videoTasks').classList.remove('hidden');
+            document.getElementById('wallet').classList.add('hidden');
+            document.getElementById('tasks').classList.add('hidden');
+            document.getElementById('luckyGifts').classList.add('hidden');
+            document.getElementById('referrals').classList.add('hidden');
         }
 
-        function openBankTransfer() {
-            document.getElementById('bankForm').classList.remove('hidden');
-            hideAllExcept('bankForm');
+        function openLuckyGifts() {
+            document.getElementById('luckyGifts').classList.remove('hidden');
+            document.getElementById('wallet').classList.add('hidden');
+            document.getElementById('tasks').classList.add('hidden');
+            document.getElementById('videoTasks').classList.add('hidden');
+            document.getElementById('referrals').classList.add('hidden');
         }
 
-        function openGooglePay() {
-            document.getElementById('googlePayForm').classList.remove('hidden');
-            hideAllExcept('googlePayForm');
-        }
-
-        function hideAllExcept(exceptId) {
-            const sections = ['wallet', 'tasks', 'videoTasks', 'luckyGifts', 'referrals', 'withdrawal', 'upiForm', 'bankForm', 'googlePayForm'];
-            sections.forEach(section => {
-                if (section !== exceptId) {
-                    document.getElementById(section).classList.add('hidden');
-                }
-            });
+        function openReferrals() {
+            document.getElementById('referrals').classList.remove('hidden');
+            document.getElementById('wallet').classList.add('hidden');
+            document.getElementById('tasks').classList.add('hidden');
+            document.getElementById('videoTasks').classList.add('hidden');
+            document.getElementById('luckyGifts').classList.add('hidden');
         }
 
         function goBack(section) {
-            loadPage(section);
+            if (section === 'main') {
+                document.getElementById('wallet').classList.add('hidden');
+                document.getElementById('tasks').classList.add('hidden');
+                document.getElementById('videoTasks').classList.add('hidden');
+                document.getElementById('luckyGifts').classList.add('hidden');
+                document.getElementById('referrals').classList.add('hidden');
+            }
         }
 
-        function withdraw(method) {
-            alert('Withdrawal initiated via ' + method + '.');
-            balance = 0; // Reset balance after withdrawal
-            document.getElementById('balance').innerText = balance;
+        function loadUPI() {
+            const upiId = prompt("Enter your UPI ID:");
+            if (upiId) {
+                alert("UPI ID " + upiId + " has been loaded.");
+            }
         }
 
-        function submitUPI() {
-            const upiId = document.getElementById('upiId').value;
-            alert('UPI ID submitted: ' + upiId);
-            goBack('withdrawal');
+        function loadBankTransfer() {
+            const bankName = prompt("Enter your Bank Name:");
+            const ifscCode = prompt("Enter your IFSC Code:");
+            const accountNumber = prompt("Enter your Account Number:");
+            const accountHolderName = prompt("Enter your Name:");
+            if (bankName && ifscCode && accountNumber && accountHolderName) {
+                alert("Bank Transfer Details Loaded.");
+            }
         }
 
-        function submitBankTransfer() {
-            const bankName = document.getElementById('bankName').value;
-            const ifscCode = document.getElementById('ifscCode').value;
-            const accountNumber = document.getElementById('accountNumber').value;
-            const accountHolderName = document.getElementById('accountHolderName').value;
-            alert('Bank Transfer submitted for account: ' + accountHolderName + ', Bank: ' + bankName);
-            goBack('withdrawal');
-        }
-
-        function submitGooglePay() {
-            const googlePayNumber = document.getElementById('googlePayNumber').value;
-            alert('Google Pay Number submitted: ' + googlePayNumber);
-            goBack('withdrawal');
+        function loadGooglePay() {
+            const gpayNumber = prompt("Enter your Google Pay Number:");
+            if (gpayNumber) {
+                alert("Google Pay Number " + gpayNumber + " has been loaded.");
+            }
         }
     </script>
 </body>
 </html>
-  
