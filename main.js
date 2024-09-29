@@ -1,83 +1,101 @@
 let totalEarnings = 0;
-let balance = 0;
-let heartCount = 0;
-
-function incrementHearts() {
-    heartCount++;
-    document.getElementById('heartCount').innerText = heartCount;
-}
-
-function startTaskTimer(taskId) {
-    alert("You must spend at least 1 minute on this task to earn a reward.");
-    let taskUrl = "https://readyketmoney.blogspot.com/2024/09/rkm.html"; // Task URL
-
-    window.open(taskUrl, "_blank");
-
-    setTimeout(() => {
-        addReward();
-    }, 60000); // 60 seconds (1 minute)
-}
-
-function startVideoTimer(videoId) {
-    alert("You must spend at least 1 minute watching this video to earn a reward.");
-    let videoUrl = "https://your-video-url.com"; // Video URL
-
-    window.open(videoUrl, "_blank");
-
-    setTimeout(() => {
-        addReward();
-    }, 60000); // 60 seconds (1 minute)
-}
-
-function addReward() {
-    totalEarnings += 2;
-    balance += 2;
-    document.getElementById('totalEarnings').innerText = totalEarnings;
-    document.getElementById('balance').innerText = balance;
-
-    alert('You have earned ₹2!');
-}
-
-function openGift(giftId) {
-    let giftUrl = "https://your-gift-url.com"; // Gift URL
-    window.open(giftUrl, "_blank");
-    alert('You opened Gift ' + giftId + '!');
-}
-
-function openWallet() {
-    hideAllSections();
-    document.getElementById('wallet').classList.remove('hidden');
-    document.getElementById('wallet').style.display = 'block';
-}
-
-function openTasks() {
-    hideAllSections();
-    document.getElementById('tasks').classList.remove('hidden');
-}
-
-function openVideoTasks() {
-    hideAllSections();
-    document.getElementById('videoTasks').classList.remove('hidden');
-}
-
-function openLuckyGifts() {
-    hideAllSections();
-    document.getElementById('luckyGifts').classList.remove('hidden');
-}
-
-function openReferrals() {
-    hideAllSections();
-    document.getElementById('referrals').classList.remove('hidden');
-}
-
-function hideAllSections() {
-    document.getElementById('wallet').classList.add('hidden');
-    document.getElementById('tasks').classList.add('hidden');
-    document.getElementById('videoTasks').classList.add('hidden');
-    document.getElementById('luckyGifts').classList.add('hidden');
-    document.getElementById('referrals').classList.add('hidden');
-}
+let referralCount = 0;
 
 function loadMainPage() {
     hideAllSections();
+    document.getElementById('wallet').classList.remove('hidden'); // Show wallet
 }
+
+function hideAllSections() {
+    const sections = [
+        'walletOptions',
+        'tasks', 
+        'videos', 
+        'luckyGifts', 
+        'referrals', 
+        'upiSection', 
+        'bankSection', 
+        'googlePaySection'
+    ];
+    sections.forEach(section => {
+        document.getElementById(section).classList.add('hidden');
+    });
+}
+
+function showWalletOptions() {
+    hideAllSections();
+    document.getElementById('walletOptions').classList.remove('hidden');
+}
+
+function showSection(sectionName) {
+    hideAllSections();
+    document.getElementById(sectionName).classList.remove('hidden');
+}
+
+function showMessage() {
+    alert("Have a nice day!");
+}
+
+function showUPISection() {
+    showSection('upiSection');
+}
+
+function showBankSection() {
+    showSection('bankSection');
+}
+
+function showGooglePaySection() {
+    showSection('googlePaySection');
+}
+
+function submitUPI() {
+    const upiId = document.getElementById('upiNumber').value;
+    alert(`UPI ID ${upiId} submitted successfully!`);
+    document.getElementById('upiNumber').value = '';
+}
+
+function submitBankDetails() {
+    const bankName = document.getElementById('bankName').value;
+    const ifscCode = document.getElementById('ifscCode').value;
+    const accountNumber = document.getElementById('accountNumber').value;
+    const accountHolder = document.getElementById('accountHolder').value;
+    alert(`Bank Details submitted for ${accountHolder} successfully!`);
+    document.getElementById('bankName').value = '';
+    document.getElementById('ifscCode').value = '';
+    document.getElementById('accountNumber').value = '';
+    document.getElementById('accountHolder').value = '';
+}
+
+function submitGooglePay() {
+    const googlePayNumber = document.getElementById('googlePayNumber').value;
+    alert(`Google Pay Number ${googlePayNumber} submitted successfully!`);
+    document.getElementById('googlePayNumber').value = '';
+}
+
+function startTask(taskNumber) {
+    const taskUrls = [
+        "https://readyketmoney.blogspot.com/2024/09/rkm.html",
+        "https://readyketmoney.blogspot.com/2024/09/task2.html",
+        "https://readyketmoney.blogspot.com/2024/09/task3.html"
+    ];
+    const taskUrl = taskUrls[taskNumber - 1];
+    alert(`Please spend a minimum of 1 minute on this website to complete the task.`);
+    window.open(taskUrl, '_blank');
+}
+
+function startVideo(videoNumber) {
+    const videoUrls = [
+        "https://your-video-url1.com",
+        "https://your-video-url2.com",
+        "https://your-video-url3.com"
+    ];
+    const videoUrl = videoUrls[videoNumber - 1];
+    alert(`Please spend a minimum of 1 minute on this video to complete the task.`);
+    window.open(videoUrl, '_blank');
+}
+
+function participateLuckyGift() {
+    alert("Participate in the Lucky Gift!");
+}
+
+// Update the total earnings and referral count as needed

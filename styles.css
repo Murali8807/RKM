@@ -1,92 +1,162 @@
-* {
-    box-sizing: border-box;
-}
-
+/* General styles */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #e2e2e2, #ffffff);
-}
-
-.container {
+    background-color: #f4f4f9; /* Light grey background for a soft look */
+    color: #333;
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-.sidebar {
-    flex: 1;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.right-sidebar {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.main-content {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* Container for the app */
+.container {
+    max-width: 600px;
+    width: 90%;
+    background-color: #ffffff; /* White background for the main container */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    overflow: hidden;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    align-items: center; /* Center align items vertically */
+    padding: 20px;
+    background-color: #007bff; /* Primary color */
+    color: #ffffff;
+}
+
+/* Logo styles */
 .logo {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    margin-bottom: 20px;
+    width: 100px; /* Set a uniform size for the logo */
+    height: auto;
+    border-radius: 50%; /* Make logo round */
     cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.logo:hover {
+    transform: scale(1.05); /* Slightly enlarge logo on hover */
+}
+
+/* Display wallet amount */
+.wallet {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: auto; /* Pushes wallet to the right */
+}
+
+/* Button styles */
+.options {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
 }
 
 button {
-    margin: 10px 0;
-    padding: 14px 28px;
-    font-size: 18px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #28a745; /* Green color for buttons */
+    color: #fff;
     border: none;
-    border-radius: 25px;
+    padding: 15px 30px;
+    border-radius: 5px; /* Rounded corners */
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    font-size: 16px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    transition: background-color 0.3s, transform 0.2s;
 }
 
+/* Hover effect */
 button:hover {
-    background-color: #45a049;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px); /* Slightly raise button */
 }
 
-button:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#earnings {
-    font-size: 24px;
-    color: #333;
-}
-
-#wallet {
-    display: none; /* Hides the wallet section initially */
-}
-
+/* Hidden class for display control */
 .hidden {
     display: none;
 }
 
-#hearts {
-    font-size: 20px;
-    color: #ff4081; /* Pink color for hearts */
+/* Section styles */
+.section {
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9; /* Light section background */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Input styles */
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #007bff; /* Border color matching primary color */
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #0056b3; /* Darker border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Animation effects */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Keyframes for fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Task, Video, Lucky Gift options */
+.option-list {
+    list-style: none;
+    padding: 0;
+}
+
+.option-list li {
+    margin: 10px 0;
+    text-align: center; /* Center the option text */
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e9ecef; /* Light grey background for list items */
+    transition: background-color 0.3s;
+}
+
+.option-list li:hover {
+    background-color: #dee2e6; /* Darker grey on hover */
+    cursor: pointer;
 }

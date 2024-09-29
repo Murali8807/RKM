@@ -3,68 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RKM</title>
+    <title>RKM App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="sidebar">
-            <div id="earnings">Total Earnings: ₹<span id="totalEarnings">0</span></div>
-            <button class="wallet-button" onclick="openWallet()">Open Wallet</button>
-            <button class="referral-button" onclick="openReferrals()">Referrals</button>
+        <div class="header">
+            <div class="wallet" id="wallet" onclick="showWalletOptions()">
+                <span>Earnings: ₹<span id="totalEarnings">0</span></span>
+            </div>
+            <img src="" alt="App Logo" class="logo" onclick="showMessage()" />
         </div>
 
-        <div class="main-content">
-            <img src="your-logo-url.png" alt="App Logo" class="logo" onclick="incrementHearts()"/>
-            <div id="hearts">💖 Hearts: <span id="heartCount">0</span></div>
+        <div class="options">
+            <button onclick="showSection('tasks')">Tasks</button>
+            <button onclick="showSection('videos')">Watch Videos</button>
+            <button onclick="showSection('luckyGifts')">Lucky Gifts</button>
+            <button onclick="showSection('referrals')">Referrals</button>
         </div>
 
-        <div class="right-sidebar">
-            <button class="task-button" onclick="openTasks()">Daily Tasks</button>
-            <button class="video-button" onclick="openVideoTasks()">Watch Videos</button>
-            <button class="gift-button" onclick="openLuckyGifts()">Lucky Gifts</button>
+        <div id="walletOptions" class="hidden section">
+            <h2>Wallet Options</h2>
+            <button onclick="showUPISection()">UPI</button>
+            <button onclick="showBankSection()">Bank Transfer</button>
+            <button onclick="showGooglePaySection()">Google Pay</button>
+            <button onclick="loadMainPage()">Back</button>
+        </div>
+
+        <div id="tasks" class="hidden section">
+            <h2>Tasks</h2>
+            <button onclick="startTask(1)">Task 1</button>
+            <button onclick="startTask(2)">Task 2</button>
+            <button onclick="startTask(3)">Task 3</button>
+            <button onclick="showMoreTasks()">More Tasks Soon</button>
+            <button onclick="loadMainPage()">Back</button>
+        </div>
+
+        <div id="videos" class="hidden section">
+            <h2>Watch Videos</h2>
+            <button onclick="startVideo(1)">Video 1</button>
+            <button onclick="startVideo(2)">Video 2</button>
+            <button onclick="startVideo(3)">Video 3</button>
+            <button onclick="showMoreVideos()">More Videos Soon</button>
+            <button onclick="loadMainPage()">Back</button>
+        </div>
+
+        <div id="luckyGifts" class="hidden section">
+            <h2>Lucky Gifts</h2>
+            <button onclick="participateLuckyGift()">Participate in Lucky Gift</button>
+            <button onclick="loadMainPage()">Back</button>
+        </div>
+
+        <div id="referrals" class="hidden section">
+            <h2>Referrals</h2>
+            <p>Referrals: <span id="referralCount">0</span></p>
+            <button onclick="loadMainPage()">Back</button>
+        </div>
+
+        <div id="upiSection" class="hidden section">
+            <h2>UPI</h2>
+            <input type="text" id="upiNumber" placeholder="Enter UPI ID">
+            <button onclick="submitUPI()">Submit UPI</button>
+            <button onclick="loadMainPage()">Back</button>
+        </div>
+
+        <div id="bankSection" class="hidden section">
+            <h2>Bank Transfer</h2>
+            <input type="text" id="bankName" placeholder="Bank Name">
+            <input type="text" id="ifscCode" placeholder="IFSC Code">
+            <input type="text" id="accountNumber" placeholder="Account Number">
+            <input type="text" id="accountHolder" placeholder="Account Holder Name">
+            <button onclick="submitBankDetails()">Submit Bank Details</button>
+            <button onclick="loadMainPage()">Back</button>
+        </div>
+
+        <div id="googlePaySection" class="hidden section">
+            <h2>Google Pay</h2>
+            <input type="text" id="googlePayNumber" placeholder="Enter Google Pay Number">
+            <button onclick="submitGooglePay()">Submit Google Pay</button>
+            <button onclick="loadMainPage()">Back</button>
         </div>
     </div>
-
-    <div id="wallet" class="hidden section">
-        <h1>Wallet</h1>
-        <p>Your Balance: ₹<span id="balance">0</span></p>
-        <button onclick="loadUPI()">Withdraw via UPI</button>
-        <button onclick="loadBankTransfer()">Withdraw via Bank Transfer</button>
-        <button onclick="loadGooglePay()">Withdraw via Google Pay</button>
-        <button onclick="loadMainPage()">Back to Main Menu</button>
-    </div>
-
-    <div id="tasks" class="hidden section">
-        <h1>Daily Tasks</h1>
-        <button id="task1" onclick="startTaskTimer(1)">Task 1</button>
-        <button id="task2" onclick="startTaskTimer(2)">Task 2</button>
-        <button id="task3" onclick="startTaskTimer(3)">Task 3</button>
-        <button onclick="loadMainPage()">More Tasks Soon...</button>
-        <button onclick="loadMainPage()">Back to Main Menu</button>
-    </div>
-
-    <div id="videoTasks" class="hidden section">
-        <h1>Video Tasks</h1>
-        <button id="video1" onclick="startVideoTimer(1)">Video 1</button>
-        <button id="video2" onclick="startVideoTimer(2)">Video 2</button>
-        <button id="video3" onclick="startVideoTimer(3)">Video 3</button>
-        <button onclick="loadMainPage()">More Videos Soon...</button>
-        <button onclick="loadMainPage()">Back to Main Menu</button>
-    </div>
-
-    <div id="luckyGifts" class="hidden section">
-        <h1>Lucky Gifts</h1>
-        <button id="gift1" onclick="openGift(1)">Participate in Lucky Gift</button>
-        <button onclick="loadMainPage()">Back to Main Menu</button>
-    </div>
-
-    <div id="referrals" class="hidden section">
-        <h1>Referral Friends</h1>
-        <p>You have referred <span id="referralCount">0</span> friends.</p>
-        <button onclick="loadMainPage()">Back to Main Menu</button>
-    </div>
-
     <script src="main.js"></script>
 </body>
 </html>
