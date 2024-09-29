@@ -6,36 +6,77 @@
     <title>RKM</title> <!-- Title set to "RKM" -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
             padding: 20px;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            animation: backgroundAnimation 10s ease infinite;
         }
+        
+        @keyframes backgroundAnimation {
+            0% { background: #f5f7fa; }
+            50% { background: #c3cfe2; }
+            100% { background: #f5f7fa; }
+        }
+
+        h1 {
+            color: #3b5998;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
         button {
             margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #4CAF50; /* Green */
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         button:hover {
-            background-color: #0056b3;
+            background-color: #45a049; /* Darker green */
+            transform: translateY(-2px);
         }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
         #earnings {
-            font-size: 20px;
+            font-size: 24px;
             margin-bottom: 20px;
+            color: #333;
         }
+
         .logo {
             border-radius: 50%;
             width: 100px;
             height: 100px;
             object-fit: cover;
+            margin-bottom: 20px;
         }
+
         .hidden {
             display: none;
+        }
+
+        /* Style for sections */
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
@@ -51,7 +92,7 @@
     <button onclick="openReferrals()">Referral Friends</button>
 
     <!-- Wallet Section -->
-    <div id="wallet" class="hidden">
+    <div id="wallet" class="hidden section">
         <h1>Wallet</h1>
         <p>Your Balance: ₹<span id="balance">0</span></p>
         <button onclick="loadUPI()">Withdraw via UPI</button>
@@ -61,7 +102,7 @@
     </div>
 
     <!-- Tasks Section -->
-    <div id="tasks" class="hidden">
+    <div id="tasks" class="hidden section">
         <h1>Daily Tasks</h1>
         <button id="task1" onclick="completeTask(1)">Task 1</button>
         <button id="task2" onclick="completeTask(2)">Task 2</button>
@@ -70,7 +111,7 @@
     </div>
 
     <!-- Video Tasks Section -->
-    <div id="videoTasks" class="hidden">
+    <div id="videoTasks" class="hidden section">
         <h1>Video Tasks</h1>
         <button id="video1" onclick="completeVideo(1)">Video 1</button>
         <button id="video2" onclick="completeVideo(2)">Video 2</button>
@@ -79,14 +120,14 @@
     </div>
 
     <!-- Lucky Gifts Section -->
-    <div id="luckyGifts" class="hidden">
+    <div id="luckyGifts" class="hidden section">
         <h1>Lucky Gifts</h1>
         <button id="gift1" onclick="openGift(1)">Gift 1</button>
         <button onclick="goBack('main')">Back to Main Menu</button>
     </div>
 
     <!-- Referrals Section -->
-    <div id="referrals" class="hidden">
+    <div id="referrals" class="hidden section">
         <h1>Referral Friends</h1>
         <p>You have referred <span id="referralCount">0</span> friends.</p>
         <button onclick="goBack('main')">Back to Main Menu</button>
@@ -98,17 +139,21 @@
 
         function completeTask(taskId) {
             let taskUrl;
+            let completionUrl;
             let taskButton;
             if (taskId === 1) {
-                taskUrl = "https://readyketmoney.blogspot.com/2024/09/rkm.html";
+                taskUrl = "https://readyketmoney.blogspot.com/2024/09/rkm.html"; // Task URL
+                completionUrl = "https://t.me/ReadytoKM_bot?profile"; // Complete task URL
                 taskButton = document.getElementById("task1");
                 taskButton.innerText = "Task 1 Completed"; // Change button text after completion
             } else if (taskId === 2) {
-                taskUrl = "https://readyketmoney.blogspot.com/2024/09/rkm.html"; // Replace with your actual Task 2 URL
+                taskUrl = "https://readyketmoney.blogspot.com/2024/09/task2.html"; // Task 2 URL
+                completionUrl = "https://t.me/ReadytoKM_bot?profile"; // Complete task URL
                 taskButton = document.getElementById("task2");
                 taskButton.innerText = "Task 2 Completed"; // Change button text after completion
             } else if (taskId === 3) {
-                taskUrl = "https://readyketmoney.blogspot.com/2024/09/rkm.html"; // Replace with your actual Task 3 URL
+                taskUrl = "https://readyketmoney.blogspot.com/2024/09/task3.html"; // Task 3 URL
+                completionUrl = "https://t.me/ReadytoKM_bot?profile"; // Complete task URL
                 taskButton = document.getElementById("task3");
                 taskButton.innerText = "Task 3 Completed"; // Change button text after completion
             }
@@ -116,8 +161,10 @@
             // Open the task URL
             window.open(taskUrl, "_blank");
 
-            // Redirect to Telegram Bot profile after task
-            window.location.href = "https://t.me/ReadytoKM_bot?profile";
+            // Redirect to completion URL after task
+            setTimeout(() => {
+                window.location.href = completionUrl;
+            }, 5000); // Wait 5 seconds before redirecting
 
             // Increment earnings upon completing the task
             totalEarnings += 2;
@@ -127,9 +174,30 @@
         }
 
         function completeVideo(videoId) {
+            let videoUrl;
+            let completionUrl = "https://t.me/ReadytoKM_bot?profile"; // Complete video URL
             let videoButton = document.getElementById("video" + videoId);
-            videoButton.innerText = "Video " + videoId + " Watched"; // Change button text after completion
+            if (videoId === 1) {
+                videoUrl = "https://your-video-url1.com"; // Replace with actual Video 1 URL
+            } else if (videoId === 2) {
+                videoUrl = "https://your-video-url2.com"; // Replace with actual Video 2 URL
+            } else if (videoId === 3) {
+                videoUrl = "https://your-video-url3.com"; // Replace with actual Video 3 URL
+            }
+
+            // Open the video URL
+            window.open(videoUrl, "_blank");
+
+            // Redirect to completion URL after watching
+            setTimeout(() => {
+                window.location.href = completionUrl;
+            }, 5000); // Wait 5 seconds before redirecting
+
+            // Change button text after completion
+            videoButton.innerText = "Video " + videoId + " Watched"; 
             alert('You watched Video ' + videoId + ' and earned ₹2!');
+
+            // Increment earnings
             totalEarnings += 2;
             balance += 2;
             document.getElementById('totalEarnings').innerText = totalEarnings;
@@ -137,6 +205,9 @@
         }
 
         function openGift(giftId) {
+            let giftUrl = "https://your-gift-url.com"; // Replace with actual gift URL
+            // Open the gift URL
+            window.open(giftUrl, "_blank");
             alert('You opened Gift ' + giftId + '!');
         }
 
@@ -201,16 +272,16 @@
             const bankName = prompt("Enter your Bank Name:");
             const ifscCode = prompt("Enter your IFSC Code:");
             const accountNumber = prompt("Enter your Account Number:");
-            const accountHolderName = prompt("Enter your Name:");
-            if (bankName && ifscCode && accountNumber && accountHolderName) {
-                alert("Bank Transfer Details Loaded.");
+            const accountName = prompt("Enter your Name:");
+            if (bankName && ifscCode && accountNumber && accountName) {
+                alert("Bank Transfer details loaded for " + accountName);
             }
         }
 
         function loadGooglePay() {
-            const gpayNumber = prompt("Enter your Google Pay Number:");
-            if (gpayNumber) {
-                alert("Google Pay Number " + gpayNumber + " has been loaded.");
+            const gPayNumber = prompt("Enter your Google Pay Number or Phone Number:");
+            if (gPayNumber) {
+                alert("Google Pay number " + gPayNumber + " has been loaded.");
             }
         }
     </script>
